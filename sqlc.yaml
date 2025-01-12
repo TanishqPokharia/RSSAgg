@@ -1,0 +1,9 @@
+version: 2
+sql:
+  - schema: "sql/schemas"
+    queries: "sql/queries"
+    engine: "postgresql"
+    gen:
+      go:
+        out: "internal/database"  # dictates the path where generated output goes to
+        emit_json_tags: true
