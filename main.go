@@ -12,6 +12,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"time"
 )
 
 func main() {
@@ -41,6 +42,9 @@ func main() {
 
 	queries := database.New(conn)
 	apiConf := utils.ApiConfig{DB: queries}
+
+	// launch goroutine for scraping
+	go beginScraping(apiConf.DB, 10, time.Minute)
 
 	fmt.Printf("Running on port %s\n", port)
 	router := chi.NewRouter()

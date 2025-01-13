@@ -8,13 +8,13 @@ import (
 	"net/http"
 )
 
-// AuthHandler This is a type of function that requires a user struct that must be provided to it,
+// AuthenticatedHandler This is a type of function that requires a user struct that must be provided to it,
 // in order to proceed with the further service
-type AuthHandler func(w http.ResponseWriter, r *http.Request, user *database.User, config *utils.ApiConfig)
+type AuthenticatedHandler func(w http.ResponseWriter, r *http.Request, user *database.User, config *utils.ApiConfig)
 
 // AuthMiddleware Injects the user struct into the handler function
 // Expects db connection and a handler function which requires user struct
-func AuthMiddleware(config *utils.ApiConfig, handler AuthHandler) http.HandlerFunc {
+func AuthMiddleware(config *utils.ApiConfig, handler AuthenticatedHandler) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		// extract the api key from headers
 		apiKey, err := auth.GetApiKey(&r.Header)

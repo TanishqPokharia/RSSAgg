@@ -11,7 +11,7 @@ import (
 	"net/http"
 )
 
-func HandlerCreateFeed() middlewares.AuthHandler {
+func HandlerCreateFeed() middlewares.AuthenticatedHandler {
 	return func(w http.ResponseWriter, r *http.Request, u *database.User, config *utils.ApiConfig) {
 		decoder := json.NewDecoder(r.Body)
 		decoder.DisallowUnknownFields()
@@ -38,7 +38,7 @@ func HandlerCreateFeed() middlewares.AuthHandler {
 	}
 }
 
-func HandlerGetFeeds() middlewares.AuthHandler {
+func HandlerGetFeeds() middlewares.AuthenticatedHandler {
 	return func(w http.ResponseWriter, r *http.Request, user *database.User, config *utils.ApiConfig) {
 		feeds, err := config.DB.GetFeeds(r.Context())
 		if err != nil {

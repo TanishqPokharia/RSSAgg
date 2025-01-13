@@ -18,6 +18,14 @@ func handlerV1Router(apiConf *utils.ApiConfig) *chi.Mux {
 		r.Get("/", middlewares.AuthMiddleware(apiConf, handlers.HandlerGetFeeds()))
 		r.Post("/", middlewares.AuthMiddleware(apiConf, handlers.HandlerCreateFeed()))
 	})
+	v1Router.Route("/feedFollows", func(r chi.Router) {
+		r.Get("/", middlewares.AuthMiddleware(apiConf, handlers.HandlerGetFeedFollows()))
+		r.Post("/", middlewares.AuthMiddleware(apiConf, handlers.HandlerCreateFeedFollow()))
+		r.Delete("/{feedFollowId}", middlewares.AuthMiddleware(apiConf, handlers.HandlerDeleteFeedFollow()))
+	})
+	v1Router.Route("/posts", func(r chi.Router) {
+		r.Get("/", middlewares.AuthMiddleware(apiConf, handlers.HandlerGetPosts))
+	})
 	v1Router.Get("/ready", handlers.HandlerReadiness) // explicitly mention request type
 	return v1Router
 }

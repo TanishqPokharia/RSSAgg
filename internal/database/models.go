@@ -12,10 +12,26 @@ import (
 )
 
 type Feed struct {
-	ID     uuid.UUID      `json:"id"`
-	Title  string         `json:"title"`
-	Url    sql.NullString `json:"url"`
-	UserID uuid.UUID      `json:"user_id"`
+	ID            uuid.UUID      `json:"id"`
+	Title         string         `json:"title"`
+	Url           sql.NullString `json:"url"`
+	UserID        uuid.UUID      `json:"user_id"`
+	LastFetchedAt sql.NullTime   `json:"last_fetched_at"`
+}
+
+type FeedFollow struct {
+	ID     uuid.UUID `json:"id"`
+	UserID uuid.UUID `json:"user_id"`
+	FeedID uuid.UUID `json:"feed_id"`
+}
+
+type Post struct {
+	ID          uuid.UUID      `json:"id"`
+	Title       string         `json:"title"`
+	Description sql.NullString `json:"description"`
+	PublishedAt time.Time      `json:"published_at"`
+	Url         string         `json:"url"`
+	FeedID      uuid.UUID      `json:"feed_id"`
 }
 
 type User struct {
