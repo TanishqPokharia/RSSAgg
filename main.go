@@ -7,7 +7,6 @@ import (
 	"fmt"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/cors"
-	dotenv "github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 	"log"
 	"net/http"
@@ -16,10 +15,10 @@ import (
 )
 
 func main() {
-	err := dotenv.Load(".env")
-	if err != nil {
-		log.Fatal(err)
-	}
+	//err := dotenv.Load(".env")
+	//if err != nil {
+	//	log.Fatal(err)
+	//}
 	port := os.Getenv("PORT")
 	if port == "" {
 		log.Fatal("PORT not found")
